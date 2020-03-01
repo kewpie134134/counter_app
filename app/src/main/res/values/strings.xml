@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">カウンターアプリ</string>
+    <string name="counter_display">0</string>
+    <string name="count_up">＋</string>
+    <string name="count_down">ー</string>
+    <string name="count_clear">C</string>
+</resources>
