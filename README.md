@@ -1,1 +1,3 @@
-# counter_app
+# Android カウンターアプリ
+
+- Android Studioでクローンし、ビルドすることでアプリを動かすことができます。
