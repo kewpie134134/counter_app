@@ -7,8 +7,15 @@ import android.view.KeyEvent.KEYCODE_VOLUME_DOWN
 import android.view.KeyEvent.KEYCODE_VOLUME_UP
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.AdListener
 
 class MainActivity : AppCompatActivity() {
+    // 広告収入のためのビルダー準備
+    lateinit var mAdView : AdView
+
 
     // カウンターのデフォルトの値をセット
     private var counter = 0
@@ -17,6 +24,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Google の広告収入用のadMobを導入
+        MobileAds.initialize(this){}
+
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
 
         // テキストビューのidを登録
         val counterDisplay = findViewById<TextView>(R.id.counter_display)
@@ -42,6 +57,35 @@ class MainActivity : AppCompatActivity() {
         // [C]ボタン選択時のアクションを登録
         buttonCountClear.setOnClickListener {
             counterDisplay.text = countClear().toString()
+        }
+
+        // 広告イベントの処理を記述
+        mAdView.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            override fun onAdFailedToLoad(errorCode : Int) {
+                // Code to be executed when an ad request fails.
+            }
+
+            override fun onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            override fun onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            override fun onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            override fun onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
         }
     }
 
